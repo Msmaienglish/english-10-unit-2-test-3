@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNIT 2: HUMANS AND THE ENVIRONMENT - TEST 3</title>
+<style>
+:root{
+  --red:#c92532; --red2:#8f1824; --coral:#ef6a72; --soft:#fff3f3; --cream:#fffafa;
+  --ink:#17212b; --blue:#244d78; --line:#e7b5ba; --correct:#e1f6e8; --correct-b:#3d9d65;
+  --wrong:#ffe2e4; --wrong-b:#d95d68; --shadow:0 12px 28px rgba(128,30,42,.13);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Nunito","Trebuchet MS",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%,rgba(255,206,210,.45) 0 6%,transparent 18%),
+    radial-gradient(circle at 88% 14%,rgba(255,226,226,.7) 0 7%,transparent 20%),
+    linear-gradient(155deg,#fff 0%,#fff7f7 44%,#fff 100%);
+  min-height:100vh;
+}
+button,input{font:inherit}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float{position:absolute;font-size:30px;opacity:.23;filter:drop-shadow(0 4px 8px rgba(155,30,45,.15));animation:drift 30s linear infinite;white-space:nowrap}
+.float.rev{animation-name:driftRev}
+@keyframes drift{from{transform:translateX(-15vw)}to{transform:translateX(115vw)}}
+@keyframes driftRev{from{transform:translateX(115vw) scaleX(-1)}to{transform:translateX(-15vw) scaleX(-1)}}
+.bubble{position:absolute;border:1.5px solid rgba(201,37,50,.16);border-radius:50%;background:rgba(255,255,255,.42);animation:rise 15s linear infinite}
+@keyframes rise{from{transform:translateY(110vh)}to{transform:translateY(-20vh)}}
+.shell{position:relative;z-index:2;max-width:1500px;margin:auto;padding:14px}
+header{
+  background:linear-gradient(135deg,#ffffffef,#fff1f1ef,#fffdfdef);
+  border:1px solid #e6b0b6;border-radius:18px;padding:14px 18px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:1fr;gap:10px;align-items:center;text-align:center;
+}
+header h1{margin:0;color:var(--red2);font-size:clamp(22px,3vw,28px);letter-spacing:.4px;text-align:center}
+header h2{margin:2px 0 0;font-size:clamp(17px,2.2vw,21px);color:#2b3e50}
+.meta{font-size:13px;line-height:1.55;color:#6e565a;text-align:center}
+.header-actions{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pill{border:1px solid #e3a8af;background:#fff;border-radius:999px;padding:8px 12px;color:#8b2130;font-weight:900;cursor:pointer}
+.pill:hover{background:#fff0f1}
+.identity{margin:12px 0;background:#ffffffea;border:1px solid #e8bcc1;border-radius:14px;padding:10px 12px;display:grid;grid-template-columns:1fr 180px auto;gap:10px;align-items:end}
+.identity label{font-size:12px;font-weight:900;color:#765b60;display:block;margin-bottom:4px}
+.identity input,.vocab-input{width:100%;border:1px solid #dfbfc3;border-radius:10px;padding:9px 10px;background:#fff;outline:none;color:#1d2731}
+.identity input:focus,.vocab-input:focus{border-color:#ce5260;box-shadow:0 0 0 3px rgba(206,82,96,.13)}
+.stats{position:sticky;top:6px;z-index:12;background:linear-gradient(90deg,#9e1f2d,#ca3442,#a52633);color:#fff;border-radius:15px;padding:10px 12px;box-shadow:0 8px 24px rgba(99,16,27,.22);display:grid;grid-template-columns:repeat(6,minmax(80px,1fr));gap:8px;margin:10px 0;backdrop-filter:blur(8px)}
+.stat{text-align:center;font-size:11px} .stat b{display:block;font-size:17px}
+.progressbar{grid-column:1/-1;height:7px;background:rgba(255,255,255,.28);border-radius:999px;overflow:hidden} .progressbar i{display:block;height:100%;width:0;background:#ffd6d9;border-radius:999px;transition:width .3s}
+.tabs{display:flex;gap:7px;overflow:auto;padding:3px 1px 10px}
+.tab{border:1px solid #e0aab1;background:#ffffffea;color:#8b2733;border-radius:999px;padding:8px 12px;font-weight:900;white-space:nowrap;cursor:pointer}
+.tab.active{background:linear-gradient(90deg,#a91f2c,#d34652);color:#fff;border-color:transparent}
+.section{display:none} .section.active{display:block}
+.split{display:grid;grid-template-columns:minmax(420px,48%) 1fr;gap:14px;align-items:start}
+.passage{position:sticky;top:110px;max-height:calc(100vh - 125px);overflow:auto;background:#fff;border:1px solid #ddb9bd;border-radius:18px;padding:18px;box-shadow:var(--shadow);line-height:1.62;color:#111}
+.passage h2{text-align:center;font-family:Georgia,serif;font-size:20px;margin:4px 0 8px;color:#7d1d29}
+.passage h3{font-family:Georgia,serif;margin:9px 0 3px;color:#7d1d29}
+.passage p,.passage li{font-family:Georgia,"Times New Roman",serif;font-size:17px;color:#111}
+.source-note{text-align:right;font-size:14px!important;color:#334!important}
+.paper-instruction{font-family:Georgia,"Times New Roman",serif;font-weight:700;background:linear-gradient(90deg,#861c27,#b32735);color:#fff;margin:-18px -18px 15px;padding:12px 15px;border-radius:17px 17px 0 0;line-height:1.3}
+.questions{display:flex;flex-direction:column;gap:12px}
+.qcard{background:#ffffffed;border:1px solid #e2b8bd;border-radius:18px;padding:16px;box-shadow:var(--shadow);scroll-margin-top:115px}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.qnum{font-weight:900;color:#7e1d28;font-size:17px;line-height:1.42}
+.qbadge{font-size:11px;background:#fff0f1;color:#8c2531;padding:5px 8px;border-radius:999px;white-space:nowrap}
+.options{display:grid;gap:8px}
+.option{width:100%;text-align:left;border:1px solid #e4c1c5;background:#fffafa;border-radius:13px;padding:11px 12px;cursor:pointer;transition:.15s;display:flex;gap:10px;align-items:flex-start;color:#1c2731;line-height:1.42}
+.option:hover:not(:disabled){transform:translateY(-1px);border-color:#cf6974;box-shadow:0 6px 14px rgba(173,46,60,.10)}
+.option:focus-visible{outline:3px solid #d96c77;outline-offset:2px}
+.option .letter{font-weight:900;color:#c02e3b;min-width:22px}
+.option.correct{background:var(--correct);border-color:var(--correct-b)} .option.correct .letter{color:#247548}
+.option.wrong{background:var(--wrong);border-color:var(--wrong-b)} .option.wrong .letter{color:#a9323e}
+.option.strike .txt{text-decoration:line-through;text-decoration-thickness:2px;opacity:.62}
+.state-tag{margin-left:auto;font-size:11px;font-weight:900}
+.feedback{display:none;margin-top:10px;border-radius:12px;padding:10px 12px;font-weight:900}
+.feedback.good{display:block;background:var(--correct);color:#176d41}
+.feedback.bad{display:block;background:var(--wrong);color:#a0343f}
+.explain{display:none;margin-top:10px;background:linear-gradient(135deg,#fff7f7,#fffdfd,#fff3f3);border:1px solid #e6c2c6;border-radius:14px;padding:13px;line-height:1.5;color:#202a33}
+.explain.open{display:block}
+.explain h4{margin:0 0 9px;color:#861e2a}
+.ex-step{background:#fff;border-radius:10px;padding:9px 10px;margin:7px 0;border:1px solid #f2dfe1} .ex-step ul{margin:6px 0;padding-left:20px} .ex-step li{margin:5px 0}
+.answer-line{margin-top:9px;background:#e3f7ea;border-left:4px solid #3da168;padding:9px 10px;border-radius:8px;font-weight:900;color:#1c7046}
+.qactions{display:none;gap:8px;flex-wrap:wrap;margin-top:10px} .qactions.show{display:flex}
+.smallbtn{border:1px solid #dfadb3;background:#fff;color:#8b2531;border-radius:10px;padding:8px 10px;font-weight:900;cursor:pointer}
+.smallbtn.primary{background:linear-gradient(90deg,#a8202d,#d34551);color:#fff;border-color:transparent}
+.vocab{background:#fff;border:1px solid #e0b3b9;border-radius:18px;box-shadow:var(--shadow);padding:16px;margin-bottom:12px}
+.vocab h3{margin:0 0 5px;color:#8b1f2b} .vocab .hint{font-size:12px;color:#7b686b;margin-bottom:10px}
+.vgrid{display:grid;grid-template-columns:1fr 1.25fr;border:1px solid #e3c3c7;border-radius:12px;overflow:hidden}
+.vrow{display:contents} .vcell{padding:8px 10px;border-bottom:1px solid #f0dfe1;background:#fffafa} .vcell:nth-child(2n){border-left:1px solid #f0dfe1;background:#fff}
+.vword{font-weight:900} .pos{font-size:11px;color:#8b777a}
+.arr-layout{display:grid;grid-template-columns:280px 1fr;gap:14px}
+.arr-guide{position:sticky;top:110px;background:linear-gradient(150deg,#fff,#fff1f2,#fff);border:1px solid #e2b5ba;border-radius:18px;padding:16px;box-shadow:var(--shadow);line-height:1.5}
+.arr-guide h3{margin-top:0;color:#8c202c}
+.arrange-bank{background:#fff;border:1px solid #ead0d3;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.arrange-bank p{font-family:Georgia,"Times New Roman",serif;margin:6px 0;line-height:1.45;color:#111}
+.insert-sentence{display:block;margin:7px 0;padding:9px;background:#fff0f1;border-radius:9px;font-family:Georgia,serif;color:#111}
+.footer-tools{margin:18px 0 8px;background:#ffffffea;border:1px solid #e2b8bd;border-radius:18px;padding:14px;box-shadow:var(--shadow);display:flex;gap:9px;flex-wrap:wrap;justify-content:center}
+.submitbox{display:none;margin-top:12px;background:linear-gradient(135deg,#fff,#fff2f3,#fff);border:1px solid #dfb7bc;border-radius:16px;padding:16px;text-align:center}
+.submitbox.show{display:block}
+.scorebig{font-size:30px;font-weight:900;color:#9c2230}
+.note{font-size:12px;color:#79676a}
+.shake{animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.confetti{position:fixed;width:9px;height:13px;border-radius:2px;z-index:99;pointer-events:none;animation:confetti .9s ease-out forwards}
+@keyframes confetti{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(720deg);opacity:0}}
+@media(max-width:900px){.split,.arr-layout{grid-template-columns:1fr}.passage,.arr-guide{position:relative;top:auto;max-height:none}.stats{grid-template-columns:repeat(3,1fr)}.identity{grid-template-columns:1fr 1fr}.identity>button{grid-column:1/-1}}
+@media(max-width:560px){.shell{padding:8px}.stats{font-size:10px}.stat b{font-size:14px}.qcard{padding:12px}.passage p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.bg{display:none}}
+@media print{body{background:#fff;color:#000}.bg,.header-actions,.stats,.tabs,.qactions,.footer-tools,.identity button{display:none!important}.shell{max-width:none;padding:0}header,.identity,.qcard,.passage,.vocab,.arr-guide{box-shadow:none;border:1px solid #aaa;background:#fff}.section{display:block!important}.split,.arr-layout{display:block}.passage{position:relative;max-height:none;margin-bottom:10px}.qcard{break-inside:avoid}.explain{background:#fff}}
+</style>
+
+<style id="unit2-test2-green-theme">
+:root{
+  --red:#2e8b57;
+  --red2:#17663d;
+  --coral:#69bd89;
+  --soft:#effaf2;
+  --cream:#fbfffc;
+  --ink:#17251d;
+  --blue:#235f43;
+  --line:#acd7b9;
+  --correct:#dff6e7;
+  --correct-b:#3c9b62;
+  --wrong:#ffe5e7;
+  --wrong-b:#d65f69;
+  --shadow:0 12px 30px rgba(27,105,63,.14);
+}
+body{
+  color:#16241c;
+  background:
+    radial-gradient(circle at 10% 8%,rgba(176,235,193,.40) 0 7%,transparent 20%),
+    radial-gradient(circle at 90% 15%,rgba(219,247,226,.75) 0 8%,transparent 23%),
+    linear-gradient(150deg,#f8fff9 0%,#ecf9ef 47%,#ffffff 100%);
+}
+.float{opacity:.30;filter:drop-shadow(0 4px 8px rgba(32,111,67,.15))}
+.bubble{border-color:rgba(39,139,83,.18);background:rgba(255,255,255,.50)}
+header{
+  background:linear-gradient(135deg,#ffffffef,#eaf8edef,#fafffbef);
+  border-color:#a9d5b7;
+  box-shadow:var(--shadow);
+}
+header h1{color:#175d38}
+header h2{color:#2e7a50}
+.meta{color:#557060}
+.pill{
+  border-color:#9bcbae;
+  color:#1f6b43;
+}
+.pill:hover{background:#eaf8ef}
+.identity{border-color:#b5d9bf;background:#ffffffef}
+.identity label{color:#577162}
+.identity input,.vocab-input{border-color:#b8d9c2}
+.identity input:focus,.vocab-input:focus{
+  border-color:#4ea773;
+  box-shadow:0 0 0 3px rgba(78,167,115,.14);
+}
+.stats{
+  background:linear-gradient(90deg,#1e6f45,#2f925b,#267b4e);
+  box-shadow:0 8px 24px rgba(24,96,58,.24);
+}
+.progressbar i{background:#c8f0d5}
+.tab{
+  border-color:#a7d1b4;
+  color:#246c47;
+}
+.tab.active{
+  background:linear-gradient(90deg,#23764a,#3d9c64);
+}
+.passage{
+  border-color:#b7d7c1;
+  box-shadow:var(--shadow);
+  background:#ffffff;
+}
+.passage h2,.passage h3{color:#225f40}
+.paper-instruction{
+  background:linear-gradient(90deg,#17623d,#2d8554);
+}
+.qcard{
+  border-color:#b8d8c1;
+  box-shadow:var(--shadow);
+}
+.qnum{color:#1e653f}
+.qbadge{background:#e8f7ed;color:#216c44}
+.option{
+  border-color:#c4dfcb;
+  background:linear-gradient(90deg,#ffffff,#f8fff9);
+}
+.option:hover:not(:disabled){
+  border-color:#62ad7d;
+  box-shadow:0 6px 14px rgba(46,139,87,.10);
+}
+.option:focus-visible{outline-color:#5dae7a}
+.option .letter{color:#2b8a57}
+.explain{
+  background:linear-gradient(135deg,#f6fff8,#ffffff,#eef9f1);
+  border-color:#c4dfcb;
+}
+.explain h4{color:#1f6942}
+.ex-step{border-color:#dceee2}
+.smallbtn{border-color:#a9d1b5;color:#216a44}
+.smallbtn.primary{
+  background:linear-gradient(90deg,#24764a,#3e9a64);
+}
+.vocab{
+  border-color:#b8d9c2;
+  background:#fff;
+}
+.vocab h3{color:#20683f}
+.vgrid{border-color:#c2ddca}
+.vcell{border-color:#e0eee4;background:#f7fff9}
+.vcell:nth-child(2n){border-color:#e0eee4;background:#fff}
+.arr-guide{
+  background:linear-gradient(150deg,#ffffff,#eef9f1,#ffffff);
+  border-color:#b5d8bf;
+}
+.arr-guide h3{color:#226a43}
+.arrange-bank{border-color:#d0e6d6}
+.insert-sentence{background:#e8f7ed}
+.footer-tools{border-color:#b7d8c1}
+.submitbox{
+  background:linear-gradient(135deg,#ffffff,#edf9f1,#ffffff);
+  border-color:#b4d7bf;
+}
+.scorebig{color:#217047}
+</style>
+
+
+<style id="unit2-test3-babypink-dark-theme">
+:root{
+  --red:#f3a9c2;
+  --red2:#ffd0df;
+  --coral:#f7b9ce;
+  --soft:#2b2130;
+  --cream:#fff8fb;
+  --ink:#f7edf3;
+  --blue:#e8c0d0;
+  --line:#765768;
+  --correct:#203e34;
+  --correct-b:#6dc59a;
+  --wrong:#4b2935;
+  --wrong-b:#ef8ca8;
+  --shadow:0 14px 34px rgba(0,0,0,.38);
+}
+html{color-scheme:dark}
+body{
+  color:#f8edf3;
+  background:
+    radial-gradient(circle at 10% 8%,rgba(246,171,198,.16) 0 8%,transparent 24%),
+    radial-gradient(circle at 90% 15%,rgba(181,118,153,.12) 0 9%,transparent 24%),
+    radial-gradient(circle at 50% 90%,rgba(244,191,212,.10) 0 8%,transparent 28%),
+    linear-gradient(155deg,#141017 0%,#211720 46%,#17131a 100%);
+}
+.float{opacity:.40;filter:drop-shadow(0 4px 12px rgba(246,170,198,.22))}
+.bubble{border-color:rgba(248,183,207,.20);background:rgba(255,220,234,.035)}
+header{
+  background:linear-gradient(135deg,rgba(36,26,36,.98),rgba(54,32,45,.97),rgba(35,27,39,.98));
+  border-color:#765469;
+  box-shadow:var(--shadow);
+}
+header h1{color:#ffd8e5;text-shadow:0 2px 18px rgba(255,185,211,.18)}
+header h2{color:#f4aec8}
+.meta{color:#d7bec8}
+.header-actions{justify-content:center}
+.pill{
+  border-color:#815c70;
+  background:#2d222e;
+  color:#ffd9e6;
+}
+.pill:hover{background:#432e3b;border-color:#b27a93}
+.identity{
+  background:rgba(39,29,40,.96);
+  border-color:#725468;
+}
+.identity label{color:#d7bcca}
+.identity input,.vocab-input{
+  background:#fffafd;
+  border-color:#d9afbf;
+  color:#23171d;
+}
+.identity input::placeholder,.vocab-input::placeholder{color:#967c88}
+.identity input:focus,.vocab-input:focus{
+  border-color:#ee9fbd;
+  box-shadow:0 0 0 3px rgba(238,159,189,.17);
+}
+.stats{
+  background:linear-gradient(90deg,#6c3c54,#9a506c,#6c4059);
+  color:#fff8fb;
+  box-shadow:0 10px 28px rgba(0,0,0,.36);
+}
+.progressbar{background:rgba(255,255,255,.13)}
+.progressbar i{background:linear-gradient(90deg,#ffd4e2,#f3abc5,#ffe0ea)}
+.tab{
+  border-color:#795b6c;
+  background:#2a212b;
+  color:#ebcfda;
+}
+.tab:hover{background:#3b2b38}
+.tab.active{
+  background:linear-gradient(90deg,#8a4964,#bc6684);
+  color:#fff;
+  border-color:transparent;
+}
+
+/* Reading paper: deliberately light + black text for long-reading comfort. */
+.passage{
+  background:linear-gradient(165deg,#fffafd,#fff5f9)!important;
+  border-color:#d9afbf!important;
+  color:#151217!important;
+  box-shadow:var(--shadow);
+}
+.passage h2,.passage h3{
+  color:#71364f!important;
+}
+.passage p,.passage li,.passage b,.passage strong,.passage u,.passage span{
+  color:#151217!important;
+}
+.passage .source-note{color:#44323a!important}
+.paper-instruction{
+  background:linear-gradient(90deg,#5d3348,#8b4863)!important;
+  color:#fff!important;
+}
+.paper-instruction *{color:#fff!important}
+
+/* Question cards: dark panels with very high contrast. */
+.qcard{
+  background:linear-gradient(145deg,rgba(44,33,45,.98),rgba(50,34,46,.98));
+  border-color:#735567;
+  box-shadow:var(--shadow);
+}
+.qnum{color:#ffe2eb}
+.qbadge{
+  background:#523848;
+  color:#ffd5e3;
+}
+.options{gap:9px}
+.option{
+  border-color:#6f5363;
+  background:linear-gradient(90deg,#342835,#3a2934);
+  color:#fff7fa;
+}
+.option:hover:not(:disabled){
+  border-color:#e39bb6;
+  box-shadow:0 7px 18px rgba(235,148,182,.14);
+}
+.option:focus-visible{outline-color:#f1aac4}
+.option .letter{color:#f8b5ce}
+.option.correct{
+  background:linear-gradient(90deg,#203c33,#21463a);
+  border-color:#68bf95;
+}
+.option.correct .letter{color:#a8e6c7}
+.option.wrong{
+  background:linear-gradient(90deg,#4d2937,#482431);
+  border-color:#df7898;
+}
+.option.wrong .letter{color:#ffb3c8}
+.feedback.good{background:#203d34;color:#b7efd4}
+.feedback.bad{background:#4c2936;color:#ffc0d1}
+.explain{
+  background:linear-gradient(145deg,#fff7fb,#fff,#fff2f7);
+  border-color:#ddb8c6;
+  color:#22161d;
+}
+.explain h4{color:#79364f}
+.ex-step{
+  background:#fff;
+  border-color:#f0d9e2;
+  color:#24181e;
+}
+.ex-step p,.ex-step li,.ex-step b,.ex-step i{color:#24181e}
+.answer-line{
+  background:#e2f6e9;
+  border-left-color:#5bb985;
+  color:#176b43;
+}
+.smallbtn{
+  border-color:#7c5c6e;
+  background:#342836;
+  color:#ffe0ea;
+}
+.smallbtn.primary{
+  background:linear-gradient(90deg,#99516d,#c56c8b);
+  color:#fff;
+}
+
+/* Vocab sheet stays light to make handwriting/typing easy. */
+.vocab{
+  background:linear-gradient(145deg,#fffafd,#fff5f9);
+  border-color:#d8afbf;
+  color:#21161c;
+}
+.vocab h3{color:#79364f}
+.vocab .hint{color:#705a64}
+.vgrid{border-color:#dfc3ce}
+.vcell{background:#fff8fb;border-color:#f0dde4;color:#21161c}
+.vcell:nth-child(2n){background:#fff;border-color:#f0dde4}
+.vword{color:#2a1821}
+.pos{color:#8a707b}
+
+/* Arrangement guidance dark, utterance bank light for easy reading. */
+.arr-guide{
+  background:linear-gradient(150deg,#332634,#472e3e,#2f2632);
+  border-color:#745768;
+  color:#f7eaf0;
+}
+.arr-guide h3{color:#ffd0df}
+.arr-guide .note{color:#cfb4c0}
+.arrange-bank{
+  background:#fffafd;
+  border-color:#dcb7c5;
+}
+.arrange-bank p,.arrange-bank b{
+  color:#171217!important;
+}
+.insert-sentence{
+  background:#ffe8f1!important;
+  color:#21151b!important;
+}
+.footer-tools{
+  background:rgba(42,31,43,.96);
+  border-color:#705365;
+}
+.submitbox{
+  background:linear-gradient(135deg,#352735,#4a3040,#352836);
+  border-color:#765669;
+  color:#fff3f8;
+}
+.scorebig{color:#ffc9dc}
+.note{color:#cfb7c1}
+
+/* Keep all content readable on smaller screens. */
+@media(max-width:900px){
+  .passage{font-size:16px}
+}
+@media print{
+  html{color-scheme:light}
+  body{background:#fff!important;color:#000!important}
+  .qcard,.arr-guide,.footer-tools,.submitbox{
+    background:#fff!important;color:#000!important;border-color:#aaa!important;
+  }
+  .qnum,.arr-guide h3,.note{color:#000!important}
+  .option{background:#fff!important;color:#000!important;border-color:#aaa!important}
+}
+</style>
+
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="float" style="top:9%;animation-duration:29s">🌸　🌿　🩷　🌙</div>
+  <div class="float rev" style="top:28%;animation-duration:35s;animation-delay:-10s">🦋　🌱　🌷</div>
+  <div class="float" style="top:52%;animation-duration:38s;animation-delay:-18s">🌺　♻️　🌿</div>
+  <div class="float rev" style="top:73%;animation-duration:31s;animation-delay:-8s">🩷　🍃　🦢</div>
+  <div class="float" style="top:89%;animation-duration:36s;animation-delay:-15s">🌷　🌿　✨</div>
+  <span class="bubble" style="left:0%;width:11px;height:11px;animation-delay:-0.0s;animation-duration:11s"></span><span class="bubble" style="left:11%;width:16px;height:16px;animation-delay:-1.2s;animation-duration:13s"></span><span class="bubble" style="left:22%;width:21px;height:21px;animation-delay:-2.4s;animation-duration:15s"></span><span class="bubble" style="left:33%;width:26px;height:26px;animation-delay:-3.5999999999999996s;animation-duration:17s"></span><span class="bubble" style="left:44%;width:31px;height:31px;animation-delay:-4.8s;animation-duration:19s"></span><span class="bubble" style="left:55%;width:11px;height:11px;animation-delay:-6.0s;animation-duration:11s"></span><span class="bubble" style="left:66%;width:16px;height:16px;animation-delay:-7.199999999999999s;animation-duration:13s"></span><span class="bubble" style="left:77%;width:21px;height:21px;animation-delay:-8.4s;animation-duration:15s"></span><span class="bubble" style="left:88%;width:26px;height:26px;animation-delay:-9.6s;animation-duration:17s"></span><span class="bubble" style="left:3%;width:31px;height:31px;animation-delay:-10.799999999999999s;animation-duration:19s"></span><span class="bubble" style="left:14%;width:11px;height:11px;animation-delay:-12.0s;animation-duration:11s"></span><span class="bubble" style="left:25%;width:16px;height:16px;animation-delay:-13.2s;animation-duration:13s"></span><span class="bubble" style="left:36%;width:21px;height:21px;animation-delay:-14.399999999999999s;animation-duration:15s"></span><span class="bubble" style="left:47%;width:26px;height:26px;animation-delay:-15.6s;animation-duration:17s"></span><span class="bubble" style="left:58%;width:31px;height:31px;animation-delay:-16.8s;animation-duration:19s"></span><span class="bubble" style="left:69%;width:11px;height:11px;animation-delay:-18.0s;animation-duration:11s"></span><span class="bubble" style="left:80%;width:16px;height:16px;animation-delay:-19.2s;animation-duration:13s"></span><span class="bubble" style="left:91%;width:21px;height:21px;animation-delay:-20.4s;animation-duration:15s"></span><span class="bubble" style="left:6%;width:26px;height:26px;animation-delay:-21.599999999999998s;animation-duration:17s"></span><span class="bubble" style="left:17%;width:31px;height:31px;animation-delay:-22.8s;animation-duration:19s"></span>
+</div>
+
+<div class="shell">
+<header>
+  <div>
+    <h1>UNIT 2: HUMANS AND THE ENVIRONMENT</h1>
+    <h2>TEST 3</h2>
+    <div class="meta"><b>Created by: Ms Tuyet Mai FTU</b> • Contact: 0365 423 820<br>English Practice • 40 questions • Baby Pink Night Study Mode 🩷🌙🌿</div>
+  </div>
+  <div class="header-actions">
+    <button class="pill" id="soundBtn" aria-label="Bật hoặc tắt âm thanh">🔊 Âm thanh: Bật</button>
+    <button class="pill" onclick="window.print()">🖨️ In bài</button>
+  </div>
+</header>
+
+<div class="identity">
+  <div><label for="studentName">Họ và tên học sinh</label><input id="studentName" placeholder="Nhập họ và tên"></div>
+  <div><label for="studentClass">Lớp</label><input id="studentClass" placeholder="VD: 10A1"></div>
+  <button class="pill" id="saveIdentity">💾 Lưu thông tin</button>
+</div>
+
+<div class="stats" aria-live="polite">
+  <div class="stat">Tổng câu<b id="sTotal">40</b></div>
+  <div class="stat">Đã làm<b id="sDone">0</b></div>
+  <div class="stat">Chưa làm<b id="sLeft">40</b></div>
+  <div class="stat">Đúng lần đầu<b id="sCorrect">0</b></div>
+  <div class="stat">Sai lần đầu<b id="sWrong">0</b></div>
+  <div class="stat">Tỷ lệ đúng<b id="sRate">0%</b></div>
+  <div class="progressbar"><i id="progress"></i></div>
+</div>
+
+<nav class="tabs">
+  <button class="tab active" data-sec="1">1–6 Advertisement</button>
+  <button class="tab" data-sec="2">7–12 Leaflet</button>
+  <button class="tab" data-sec="3">13–17 Arrangement</button>
+  <button class="tab" data-sec="4">18–22 Cloze</button>
+  <button class="tab" data-sec="5">23–30 Reading 1</button>
+  <button class="tab" data-sec="6">31–40 Reading 2</button>
+</nav>
+
+<main id="main"></main>
+
+<div class="footer-tools">
+  <button class="pill" id="unfinishedBtn">↩️ Quay lại câu chưa làm</button>
+  <button class="pill" id="wrongBtn">❌ Xem câu đã sai</button>
+  <button class="pill" id="submitBtn">📩 Nộp bài & chấm điểm</button>
+  <button class="pill" id="resetBtn">🔄 Làm lại toàn bộ</button>
+  <button class="pill" id="clearBtn">🧹 Xóa dữ liệu đã lưu</button>
+</div>
+<div class="submitbox" id="submitBox"></div>
+</div>
+
+<script>
+const QUESTIONS=[{"n":1,"section":1,"stem":"Question 1:","options":{"A":"concern","B":"concerned","C":"concerning","D":"concerns"},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>concern</b> (n, singular/uncountable): mối lo; số ít không hòa hợp với <i>have led</i>.</li><li><b>B.</b> <b>concerned</b> (adj): lo lắng; không thể làm danh từ trung tâm sau <i>environmental</i> ở đây.</li><li><b>C.</b> <b>concerning</b> (prep/adj): liên quan đến / đáng lo; sai từ loại.</li><li><b>D.</b> <b>concerns</b> (n, plural): những mối lo ngại; hòa hợp với động từ số nhiều <i>have led</i>.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Tuy nhiên, những mối lo ngại về môi trường ngày càng tăng đã khiến nhiều người đặt câu hỏi liệu các sản phẩm này có nên bị cấm hoàn toàn hay không.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Ngay sau chỗ trống là <b>have led</b> → chủ ngữ phải là danh từ số nhiều.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p><b>environmental concerns</b> là collocation tự nhiên và số nhiều phù hợp với <i>have led</i>.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Nếu dùng số ít phải là <i>concern has led</i>.</li><li><b>B.</b> Tính từ.</li><li><b>C.</b> Không phải danh từ số nhiều.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Chú ý hòa hợp chủ ngữ–động từ: <b>plural noun + have</b>. Collocation: <b>environmental concerns</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. concerns</div>"},{"n":2,"section":1,"stem":"Question 2:","options":{"A":"reducing","B":"reduce","C":"to reduce","D":"reduced"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>reducing</b>: V-ing, dùng sau <i>suggest</i> khi không có tân ngữ + that-clause.</li><li><b>B.</b> <b>reduce</b>: nguyên mẫu không dùng trực tiếp sau <i>suggest</i>.</li><li><b>C.</b> <b>to reduce</b>: không dùng cấu trúc <i>suggest to V</i>.</li><li><b>D.</b> <b>reduced</b>: V2/V3, không phù hợp.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Các nhóm môi trường đề xuất giảm việc sử dụng các sản phẩm dùng một lần bất cứ khi nào có thể.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cấu trúc chuẩn: <b>suggest + V-ing</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p><b>suggest reducing</b> đúng ngữ pháp và đúng nghĩa.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>B.</b> Thiếu -ing.</li><li><b>C.</b> Không có cấu trúc <i>suggest to reduce</i>.</li><li><b>D.</b> Sai dạng động từ.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Nhớ: <b>suggest doing sth</b> hoặc <b>suggest that S (should) V</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. reducing</div>"},{"n":3,"section":1,"stem":"Question 3:","options":{"A":"on","B":"at","C":"to","D":"for"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>on</b>: trên/về; không đi với <i>lead</i> trong cấu trúc này.</li><li><b>B.</b> <b>at</b>: tại; sai collocation.</li><li><b>C.</b> <b>to</b>: tạo cụm <i>lead to</i> = dẫn đến.</li><li><b>D.</b> <b>for</b>: cho/vì; sai collocation.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Rác nhựa thường kết thúc ở các khu vực tự nhiên, dẫn đến thiệt hại nghiêm trọng cho động vật hoang dã.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cụm cố định <b>lead to + noun</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p><b>leading to serious damage</b> là cấu trúc chuẩn.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không nói <i>lead on damage</i>.</li><li><b>B.</b> Không nói <i>lead at damage</i>.</li><li><b>D.</b> Không nói <i>lead for damage</i>.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>lead to + N/V-ing</b> = dẫn đến.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. to</div>"},{"n":4,"section":1,"stem":"Question 4:","options":{"A":"sustainable","B":"most sustainable","C":"more sustainable","D":"the most sustainable"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>sustainable</b>: bền vững; dạng nguyên cấp, không phù hợp khi có <i>than</i>.</li><li><b>B.</b> <b>most sustainable</b>: so sánh nhất nhưng thiếu <i>the</i> và không đi với <i>than</i>.</li><li><b>C.</b> <b>more sustainable</b>: so sánh hơn, đúng với <i>than</i>.</li><li><b>D.</b> <b>the most sustainable</b>: so sánh nhất.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Chính phủ có thể khuyến khích sử dụng những sản phẩm bền vững hơn nhựa dùng một lần.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Từ khóa <b>than</b> → cần so sánh hơn.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>Tính từ dài <i>sustainable</i> dùng <b>more + adjective</b>.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Thiếu so sánh hơn.</li><li><b>B.</b> Sai cấp so sánh.</li><li><b>D.</b> So sánh nhất không đi với <i>than</i> như vậy.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Tính từ dài: <b>more + adj + than</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. more sustainable</div>"},{"n":5,"section":1,"stem":"Question 5:","options":{"A":"gain","B":"take","C":"receive","D":"place"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>gain responsibility</b>: không phải collocation tự nhiên trong nghĩa ‘nhận trách nhiệm’.</li><li><b>B.</b> <b>take responsibility</b>: chịu/nhận trách nhiệm.</li><li><b>C.</b> <b>receive responsibility</b>: không tự nhiên.</li><li><b>D.</b> <b>place responsibility</b>: thường là <i>place responsibility on someone</i>, tức đặt trách nhiệm lên ai.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Thay vào đó, cả chính phủ và người dân nên chịu trách nhiệm về việc giảm rác thải.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cụm cố định <b>take responsibility for + N/V-ing</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B là collocation chuẩn.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không tự nhiên.</li><li><b>C.</b> Không tự nhiên.</li><li><b>D.</b> Khác nghĩa và cần cấu trúc khác.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>take responsibility for</b> = chịu trách nhiệm về.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. take</div>"},{"n":6,"section":1,"stem":"Question 6:","options":{"A":"whose","B":"where","C":"who","D":"which"},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>whose</b>: chỉ sở hữu và cần danh từ theo sau.</li><li><b>B.</b> <b>where</b>: chỉ nơi chốn.</li><li><b>C.</b> <b>who</b>: chỉ người.</li><li><b>D.</b> <b>which</b>: đại từ quan hệ chỉ vật/sự việc, làm chủ ngữ của <i>aim</i>.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Các giải pháp dài hạn được hỗ trợ bởi những chiến dịch nhằm giảm rác nhựa có thể tạo ra thay đổi lâu dài.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Antecedent là <b>campaigns</b> (sự vật/sự việc), sau chỗ trống là động từ <b>aim</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p><b>campaigns which aim...</b> đúng mệnh đề quan hệ.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không có ý sở hữu.</li><li><b>B.</b> Campaigns không phải nơi chốn.</li><li><b>C.</b> Không dùng cho chiến dịch.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Vật/sự việc + <b>which/that + V</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. which</div>"},{"n":7,"section":2,"stem":"Question 7:","options":{"A":"Although","B":"Since","C":"Unless","D":"If"},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>Although</b>: mặc dù, cần quan hệ nhượng bộ.</li><li><b>B.</b> <b>Since</b>: bởi vì/kể từ khi; không phù hợp với dự đoán điều kiện.</li><li><b>C.</b> <b>Unless</b>: trừ khi, mang nghĩa phủ định điều kiện.</li><li><b>D.</b> <b>If</b>: nếu; phù hợp câu điều kiện loại 1.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Nếu số lượng du khách tiếp tục tăng với tốc độ hiện tại, các khu vực tự nhiên cuối cùng sẽ chịu áp lực môi trường nghiêm trọng.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Vế chính có <b>will eventually experience</b> → cấu trúc điều kiện thực ở tương lai.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p><b>If + present simple, will + V</b> đúng.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không có đối lập.</li><li><b>B.</b> Không phải nguyên nhân chắc chắn.</li><li><b>C.</b> Sẽ đảo nghĩa câu.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Câu điều kiện loại 1: <b>If + S + V(s/es), S + will + V</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. If</div>"},{"n":8,"section":2,"stem":"Question 8:","options":{"A":"control","B":"controlled","C":"have controlled","D":"to control"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>control</b>: hiện tại/nguyên mẫu.</li><li><b>B.</b> <b>controlled</b>: quá khứ đơn, dùng trong cấu trúc giả định sau <i>It is high time</i>.</li><li><b>C.</b> <b>have controlled</b>: hiện tại hoàn thành, không dùng ở đây.</li><li><b>D.</b> <b>to control</b>: to-infinitive.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Đã đến lúc chính quyền địa phương kiểm soát số lượng du khách trước khi tiếng ồn, rác và quá tải gây hại môi trường sống.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cấu trúc đặc biệt <b>It is high time + S + past simple</b> diễn tả việc đáng lẽ nên làm ngay.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p><b>controlled</b> là đáp án ngữ pháp chuẩn.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không dùng present simple sau <i>high time</i> trong mẫu này.</li><li><b>C.</b> Sai cấu trúc.</li><li><b>D.</b> Sai cấu trúc.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>It is (high) time + S + V2/ed</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. controlled</div>"},{"n":9,"section":2,"stem":"Question 9:","options":{"A":"enter","B":"are entering","C":"entered","D":"was entering"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>enter</b>: chủ động; protected areas không tự ‘đi vào’.</li><li><b>B.</b> <b>are entering</b>: chủ động tiếp diễn, sai vai nghĩa.</li><li><b>C.</b> <b>entered</b>: V3 trong bị động <i>are sometimes entered by...</i>.</li><li><b>D.</b> <b>was entering</b>: chủ động quá khứ tiếp diễn và sai số.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Trong bốn nhóm du lịch, hai nhóm tuân thủ hướng dẫn môi trường cẩn thận, trong khi các khu vực được bảo vệ đôi khi bị những nhóm còn lại đi vào.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Trước chỗ trống đã có <b>are sometimes</b> và sau có <b>by the others</b> → bị động.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>Cần <b>V3 = entered</b>.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Thiếu dạng bị động.</li><li><b>B.</b> Chủ động.</li><li><b>D.</b> Sai thì, sai voice và số.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Bị động hiện tại đơn: <b>am/is/are + V3</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. entered</div>"},{"n":10,"section":2,"stem":"Question 10:","options":{"A":"put away","B":"look into","C":"get over","D":"run out of"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>put away</b>: cất đi.</li><li><b>B.</b> <b>look into</b>: xem xét/điều tra kỹ.</li><li><b>C.</b> <b>get over</b>: vượt qua/hồi phục.</li><li><b>D.</b> <b>run out of</b>: hết/cạn.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Họ cũng xem xét các khiếu nại về hoạt động du lịch trước khi đưa ra quy định mới.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Tân ngữ <b>complaints</b> phù hợp với hành động xem xét/điều tra.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p><b>look into complaints</b> là collocation tự nhiên.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không thể ‘cất khiếu nại đi’ theo nghĩa cần.</li><li><b>C.</b> Không phải ‘vượt qua khiếu nại’.</li><li><b>D.</b> Không thể ‘hết khiếu nại’ ở đây.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>look into a problem/complaint</b> = xem xét kỹ.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. look into</div>"},{"n":11,"section":2,"stem":"Question 11:","options":{"A":"appliances","B":"habitats","C":"devices","D":"schedules"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>appliances</b>: thiết bị gia dụng.</li><li><b>B.</b> <b>habitats</b>: môi trường sống.</li><li><b>C.</b> <b>devices</b>: thiết bị.</li><li><b>D.</b> <b>schedules</b>: lịch trình.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Các chương trình giáo dục và giới hạn du khách có thể giúp bảo vệ những môi trường sống tự nhiên nơi động vật sống và thực vật phát triển.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Mệnh đề <b>where animals live and plants grow</b> chính là định nghĩa của habitat.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p><b>natural habitats</b> đúng nghĩa.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Không phải nơi sinh vật sống.</li><li><b>C.</b> Không phù hợp.</li><li><b>D.</b> Không phù hợp.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>habitat</b> = natural home/environment of an animal or plant.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. habitats</div>"},{"n":12,"section":2,"stem":"Question 12:","options":{"A":"protection","B":"exploration","C":"development","D":"recreation"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>protection</b>: sự bảo vệ.</li><li><b>B.</b> <b>exploration</b>: sự khám phá.</li><li><b>C.</b> <b>development</b>: sự phát triển.</li><li><b>D.</b> <b>recreation</b>: hoạt động giải trí.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Trong tương lai, du lịch sinh thái chỉ có thể thành công nếu du khách có cam kết mạnh mẽ hơn đối với việc bảo vệ môi trường.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cụm tự nhiên <b>commitment to environmental protection</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A phù hợp cả ngữ nghĩa lẫn collocation.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>B.</b> Khám phá môi trường không phải mục tiêu bảo tồn.</li><li><b>C.</b> Có thể liên quan nhưng không đúng trọng tâm.</li><li><b>D.</b> Không phù hợp.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Collocation: <b>environmental protection</b> = bảo vệ môi trường.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. protection</div>"},{"n":13,"section":3,"stem":"<div class=\"arrange-bank\">\n<p><b>a.</b> Ava: Maybe the app can guide buses around busy streets, so fewer engines wait and emit smoke near the school.</p>\n<p><b>b.</b> Ben: The air outside our gate was bad again because cars waited at the lights for nearly twenty minutes.</p>\n<p><b>c.</b> Ben: That sounds useful. I’ll mention it in our smart city presentation and add a photo of the traffic jam.</p>\n</div>","options":{"A":"a – b – c","B":"c – a – b","C":"b – a – c","D":"b – c – a"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> a đưa giải pháp trước khi b nêu vấn đề tắc xe.</li><li><b>B.</b> c mở bằng <i>That sounds useful</i> nhưng chưa có đề xuất nào.</li><li><b>C.</b> b nêu vấn đề → a gợi ý app điều hướng xe → c phản hồi trực tiếp đề xuất.</li><li><b>D.</b> c khen ‘useful’ trước khi a đưa giải pháp.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>Ben nói không khí trước cổng trường xấu vì xe chờ đèn lâu; Ava gợi ý ứng dụng điều hướng xe buýt; Ben thấy hữu ích và sẽ đưa vào bài thuyết trình.</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p><i>That sounds useful</i> ở c phải quy chiếu đề xuất a; a phải xuất hiện sau vấn đề b.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C có mạch vấn đề → giải pháp → phản hồi.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Giải pháp xuất hiện trước vấn đề.</li><li><b>B.</b> Thiếu tiền đề cho <i>That</i>.</li><li><b>D.</b> Phản hồi đứng trước đề xuất.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Hội thoại thường theo <b>problem → suggestion → response</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. b – a – c</div>"},{"n":14,"section":3,"stem":"<div class=\"arrange-bank\">\n<p><b>a.</b> Emma: Then students could send clear photos after school, so the team knows which spots need attention.</p>\n<p><b>b.</b> Liam: Good plan. It combines technology with local help, not just screens.</p>\n<p><b>c.</b> Liam: Our neighbourhood app shows which bins are full, but some residents still leave rubbish beside them when collection is late.</p>\n<p><b>d.</b> Emma: Are the collection teams checking the app every morning before they choose their route?</p>\n<p><b>e.</b> Liam: Yes, but the map updates slowly when the mobile signal is weak near the river.</p>\n</div>","options":{"A":"c – d – e – a – b","B":"c – a – b – d – e","C":"d – e – c – a – b","D":"b – c – d – e – a"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> c nêu vấn đề → d hỏi về cách đội thu gom dùng app → e trả lời và nêu điểm yếu cập nhật → a đưa giải pháp bổ sung bằng ảnh → b đánh giá ‘Good plan’.</li><li><b>B.</b> a đưa giải pháp trước khi d/e làm rõ vấn đề cập nhật chậm.</li><li><b>C.</b> d mở bằng câu hỏi về <i>the app</i> trước khi c giới thiệu app.</li><li><b>D.</b> b mở bằng <i>Good plan</i> nhưng chưa có kế hoạch.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>Liam mô tả app và vấn đề rác; Emma hỏi đội thu gom có xem app không; Liam nói có nhưng bản đồ cập nhật chậm; Emma đề xuất học sinh gửi ảnh; Liam đồng ý.</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cặp <b>Are...? → Yes...</b> nối d–e; <b>Then</b> ở a dựa trên vấn đề e; <b>Good plan</b> ở b kết.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A giữ đúng lượt hỏi–đáp và mạch giải pháp.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>B.</b> Giải pháp quá sớm.</li><li><b>C.</b> Thiếu tiền đề cho app.</li><li><b>D.</b> Câu kết bị đặt đầu.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Theo dõi từ nối <b>Then</b>, câu hỏi–trả lời và các đại từ quy chiếu.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. c – d – e – a – b</div>"},{"n":15,"section":3,"stem":"<div class=\"arrange-bank\">\n<p>Dear students,<br>I hope you are having a good week.</p>\n<p><b>a.</b> Before the visit, please bring your notebook and prepare one thoughtful question about greener transport.</p>\n<p><b>b.</b> Engineers there will show us how street lamps become dimmer when roads are empty.</p>\n<p><b>c.</b> Our class will visit the city control room next Thursday to learn how smart lights save electricity.</p>\n<p><b>d.</b> Your short notes will be used for a simple group poster after the trip, so please listen carefully.</p>\n<p><b>e.</b> They will also explain how sensors help buses arrive on time and reduce emissions.</p>\n<p>Best regards,<br>Ms Brown</p>\n</div>","options":{"A":"c – a – b – e – d","B":"c – b – a – e – d","C":"a – c – b – d – e","D":"b – a – c – e – d"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> c giới thiệu chuyến đi → a hướng dẫn chuẩn bị trước chuyến đi → b/e mô tả hoạt động tại đó → d nêu nhiệm vụ sau chuyến đi.</li><li><b>B.</b> b bắt đầu phần ‘during visit’ trước khi a quay lại <i>Before the visit</i>, trình tự thời gian kém mượt.</li><li><b>C.</b> a nói <i>the visit</i> trước khi c giới thiệu chuyến đi.</li><li><b>D.</b> b nói <i>there</i> khi chưa biết nơi nào.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>Ms Brown thông báo chuyến tham quan phòng điều khiển, yêu cầu học sinh chuẩn bị, cho biết kỹ sư sẽ trình bày gì và cách dùng ghi chú sau chuyến đi.</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Dấu hiệu thời gian và quy chiếu: <b>visit → Before the visit → there → also → after the trip</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A có trình tự rõ nhất.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>B.</b> Đảo phần chuẩn bị với hoạt động.</li><li><b>C.</b> Thiếu tiền đề cho <i>the visit</i>.</li><li><b>D.</b> Thiếu tiền đề cho <i>there</i>.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Email sự kiện: <b>introduce event → preparation → during-event details → follow-up</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. c – a – b – e – d</div>"},{"n":16,"section":3,"stem":"<div class=\"arrange-bank\">\n<p><b>a.</b> Some older residents worried the path would feel unsafe, so volunteers tested the lights with them after dinner.</p>\n<p><b>b.</b> Last month, the lights in River Park stayed on all night, even when no one used the path after ten.</p>\n<p><b>c.</b> By the end of the month, the new system kept the park bright when needed and reduced the energy bill.</p>\n<p><b>d.</b> This wasted electricity, and neighbours complained that the city should spend the money on safer crossings instead.</p>\n<p><b>e.</b> The council installed small sensors that made the lamps brighter only when walkers or bikes passed.</p>\n</div>","options":{"A":"b – e – d – c – a","B":"d – b – e – c – a","C":"b – d – e – a – c","D":"a – b – d – c – e"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> e giải pháp trước d mô tả hậu quả; a nỗi lo an toàn bị đặt sau kết quả c.</li><li><b>B.</b> d mở bằng <i>This wasted electricity</i> khi chưa có ‘This’ để quy chiếu.</li><li><b>C.</b> b nêu đèn bật cả đêm → d ‘This’ chỉ sự lãng phí → e lắp cảm biến → a kiểm tra lo ngại an toàn → c kết quả cuối tháng.</li><li><b>D.</b> a mở bằng lo ngại về ‘the path’ trước khi nêu vấn đề; e giải pháp lại đứng sau kết quả.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>Đèn công viên bật cả đêm gây lãng phí; hội đồng lắp cảm biến; tình nguyện viên kiểm tra cùng người dân lo ngại an toàn; cuối tháng hệ thống vừa đủ sáng vừa giảm hóa đơn.</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p><b>This</b> ở d phải theo b; <b>By the end of the month</b> ở c là kết quả cuối.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C đúng mạch vấn đề → hậu quả → giải pháp → kiểm chứng → kết quả.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Sai trật tự nguyên nhân–giải pháp.</li><li><b>B.</b> Đại từ quy chiếu sai.</li><li><b>D.</b> Kết quả trước giải pháp.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Văn kể sự việc: <b>problem → consequence → solution → concern/test → result</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. b – d – e – a – c</div>"},{"n":17,"section":3,"stem":"<div class=\"arrange-bank\">\n<p><b>a.</b> A student transport club proposed a simple app that showed live bus arrivals, seat space, and safer walking paths to nearby stops.</p>\n<p><b>b.</b> The first month of reports proved that better information helped, but it also exposed older buses and uncovered waiting areas as real barriers.</p>\n<p><b>c.</b> Morning travel around Lakeside School had become messy, with late smoky buses, packed motorbike lanes, and students waiting too close to the road.</p>\n<p><b>d.</b> The council responded by changing the timetable, replacing the worst buses, and building a shaded stop outside the school gate.</p>\n<p><b>e.</b> By the end of term, more families trusted the bus route, and the street before lessons was quieter than it had been for months.</p>\n</div>","options":{"A":"c – a – e – d – b","B":"a – c – b – d – e","C":"c – a – b – d – e","D":"c – d – b – a – e"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> e kết quả cuối kỳ xuất hiện trước d phản ứng của council và b báo cáo tháng đầu.</li><li><b>B.</b> a giải pháp xuất hiện trước c nêu vấn đề giao thông.</li><li><b>C.</b> c vấn đề → a app được đề xuất → b báo cáo cho thấy app giúp nhưng lộ thêm rào cản → d council xử lý → e kết quả cuối kỳ.</li><li><b>D.</b> d council phản ứng trước khi b có báo cáo và trước a app.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>Giao thông quanh trường lộn xộn; câu lạc bộ đề xuất app; báo cáo ban đầu cho thấy cả lợi ích và vấn đề sâu hơn; hội đồng cải thiện dịch vụ; cuối kỳ tình hình tốt hơn.</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Mốc <b>first month → council responded → by the end of term</b> xác định b–d–e; trước đó phải là c–a.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C là chuỗi logic và thời gian hoàn chỉnh.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Đảo kết quả và nguyên nhân.</li><li><b>B.</b> Giải pháp trước vấn đề.</li><li><b>D.</b> Phản ứng trước dữ liệu.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Nhìn mốc thời gian và quan hệ <b>problem → initiative → findings → response → outcome</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. c – a – b – d – e</div>"},{"n":18,"section":4,"stem":"Question 18:","options":{"A":"make a quick choice and see it as an eco-friendly bargain","B":"making a quick choice and seeing it as an eco-friendly bargain","C":"to make a quick choice and see it as an eco-friendly bargain","D":"a quick choice which sees it as an eco-friendly bargain"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> Sau <i>lead to</i> không dùng nguyên mẫu không -ing theo nghĩa này.</li><li><b>B.</b> <b>making... and seeing...</b>: hai gerund song song sau giới từ <i>to</i> trong phrasal verb <i>lead to</i>.</li><li><b>C.</b> <i>to</i> ở <i>lead to</i> là giới từ, không phải dấu hiệu to-infinitive.</li><li><b>D.</b> Sai logic: ‘a quick choice’ không thể tự <i>see</i> món đồ là bargain.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Khi một chiếc áo mới rẻ hơn bữa trưa, giá thấp có thể dẫn đến việc người mua đưa ra lựa chọn nhanh và xem nó như một món hời thân thiện với môi trường.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Cấu trúc <b>lead to + noun/V-ing</b>; hai hành động cần song song.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B có <b>making</b> và <b>seeing</b> đều là V-ing.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Sai sau giới từ <i>to</i>.</li><li><b>C.</b> Nhầm <i>to</i> với infinitive marker.</li><li><b>D.</b> Sai logic chủ thể.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>lead to doing sth</b>; parallelism: <b>making ... and seeing ...</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. making a quick choice and seeing it as an eco-friendly bargain</div>"},{"n":19,"section":4,"stem":"Question 19:","options":{"A":"with tiny fibres can break down into them when washed repeatedly","B":"which can break down into tiny fibres when washed repeatedly","C":"whose repeated washing can break down into rivers and oceans","D":"and can be broken down as tiny fibres during repeated washing"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> Sau <i>with</i> cấu trúc này sai; đồng thời <i>them</i> không có tiền đề rõ.</li><li><b>B.</b> <b>which</b> thay cho synthetic materials; <i>can break down into tiny fibres</i> đúng ngữ pháp và nghĩa.</li><li><b>C.</b> <i>whose repeated washing</i> không hợp nghĩa; vật liệu không ‘break down into rivers’.</li><li><b>D.</b> <i>be broken down as tiny fibres</i> dùng giới từ sai và chuyển nghĩa thành bị động không tự nhiên.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Nhiều quần áo giá rẻ được làm từ vật liệu tổng hợp, những vật liệu này có thể phân rã thành các sợi cực nhỏ khi được giặt lặp lại.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Chỗ trống sau dấu phẩy cần mệnh đề quan hệ bổ nghĩa cho <b>synthetic materials</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p><b>which can break down...</b> đúng chủ ngữ, modal và ý nghĩa.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Sai cấu trúc.</li><li><b>C.</b> Sai quan hệ sở hữu và sai nghĩa.</li><li><b>D.</b> Sai collocation/voice.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Mệnh đề quan hệ không xác định: <b>, which + verb ...</b></p></div>\n<div class=\"answer-line\">Đáp án đúng: B. which can break down into tiny fibres when washed repeatedly</div>"},{"n":20,"section":4,"stem":"Question 20:","options":{"A":"Beyond the price tag, little environmental impact remains to consider","B":"The price tag therefore shows how eco-friendly production has become","C":"Beyond the price tag, much of the environmental impact remains hidden","D":"The low price mainly proves that emissions and waste have been reduced"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> Nói <i>little environmental impact</i> còn lại để xem xét, trái đoạn vừa liệt kê nhiều chi phí ẩn.</li><li><b>B.</b> Giá thấp không chứng minh sản xuất eco-friendly.</li><li><b>C.</b> Đúng: nhiều tác động môi trường nằm ngoài giá niêm yết và bị ẩn.</li><li><b>D.</b> Trái ý; giá thấp không chứng minh emissions/waste giảm.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Ngoài con số trên nhãn giá, phần lớn tác động môi trường vẫn bị che khuất.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Các câu trước liệt kê water, energy, chemicals, labour đã được sử dụng nhưng không phản ánh trong giá.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C tóm đúng ‘hidden costs’ của fast fashion.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Đảo ngược mức độ tác động.</li><li><b>B.</b> Suy luận sai.</li><li><b>D.</b> Suy luận sai và trái bài.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p>Khi chọn câu nối đoạn, kiểm tra câu nào khái quát chính xác các bằng chứng ngay trước đó.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. Beyond the price tag, much of the environmental impact remains hidden</div>"},{"n":21,"section":4,"stem":"Question 21:","options":{"A":"so shoppers often rely on visible style and discounts to make choices","B":"because style and discounts raise awareness of these hidden impacts","C":"while these hidden impacts are displayed through style and discounts","D":"instead of visible style and discounts being used to make choices"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> <b>so</b> nêu hệ quả hợp lý: vì tác động ẩn không nhìn thấy nên người mua dựa vào style/discount dễ thấy.</li><li><b>B.</b> Sai: style/discount không làm người mua nhận thức tác động ẩn.</li><li><b>C.</b> Trái câu trước: hidden impacts không được hiển thị qua style/discount.</li><li><b>D.</b> Cấu trúc rườm rà và không tạo logic câu.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Chúng ta không thể thấy nước thải, khí thải hay rác dệt may..., vì vậy người mua thường dựa vào kiểu dáng và giảm giá dễ nhìn để đưa ra lựa chọn.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Câu đầu đoạn nói <b>what we can see</b> là evidence dễ nhất; sau đó liệt kê những gì <b>cannot see</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A nối đúng quan hệ nguyên nhân–hệ quả.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>B.</b> Đảo nghĩa.</li><li><b>C.</b> Trái nghĩa ‘cannot see’.</li><li><b>D.</b> Không hoàn chỉnh mạch logic.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>so</b> = vì vậy, dùng khi câu sau là hệ quả của câu trước.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. so shoppers often rely on visible style and discounts to make choices</div>"},{"n":22,"section":4,"stem":"Question 22:","options":{"A":"not judging cheap clothing only by price but considering its environmental impact","B":"not to judge cheap clothing only by price but to consider its environmental impact","C":"not judge cheap clothing only by price but consider its environmental impact","D":"to avoid judging cheap clothing only by price but consider its environmental impact"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích từ vựng / cấu trúc 4 đáp án</b><ul><li><b>A.</b> Sau <i>be careful</i> để diễn tả lời khuyên hành động, dạng chuẩn là <i>be careful not to + V</i>; phương án A thiếu <i>to</i>.</li><li><b>B.</b> <b>not to judge ... but to consider ...</b>: đúng cấu trúc và song song.</li><li><b>C.</b> Thiếu <i>to</i> sau <i>be careful</i>.</li><li><b>D.</b> <i>to avoid judging ... but consider</i> không song song: judging ↔ consider.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch nghĩa toàn câu / ngữ cảnh</b><p>“Vì vậy, người tiêu dùng nên cẩn thận không đánh giá quần áo rẻ chỉ bằng giá, mà phải cân nhắc tác động môi trường của nó.”</p></div>\n<div class=\"ex-step\"><b>3. Từ khóa hoặc dấu hiệu</b><p>Trước chỗ trống là <b>be careful</b>; cấu trúc tự nhiên <b>be careful not to do A but to do B</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B giữ parallelism <i>to judge / to consider</i>.</p></div>\n<div class=\"ex-step\"><b>5. Tại sao không chọn các đáp án còn lại?</b><ul><li><b>A.</b> Sai mẫu sau <i>careful</i>.</li><li><b>C.</b> Thiếu infinitive marker.</li><li><b>D.</b> Hai vế không song song.</li></ul></div>\n<div class=\"ex-step\"><b>6. Kiến thức cần nhớ</b><p><b>be careful not to V</b>; cấu trúc đối lập song song <b>not to V1 but to V2</b>.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. not to judge cheap clothing only by price but to consider its environmental impact</div>"},{"n":23,"section":5,"stem":"Question 23: In which paragraph does the writer show that convenience can feel helpful in daily life while still hiding a longer environmental cost?","options":{"A":"Paragraph 1","B":"Paragraph 3","C":"Paragraph 4","D":"Paragraph 2"},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đúng: đoạn 1 nói các lựa chọn tiện lợi tiết kiệm thời gian, bảo vệ đồ, giúp người mệt thấy được chăm sóc, nhưng packaging bắt đầu ‘a much longer journey’.</li><li><b>B.</b> Đoạn 3 nói tốc độ, quảng cáo và việc thiếu lựa chọn bền vững.</li><li><b>C.</b> Đoạn 4 đưa giải pháp thiết kế lại convenience.</li><li><b>D.</b> Đoạn 2 giải thích tính chất nhựa và hệ thống rác thải.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Đoạn nào cho thấy sự tiện lợi có thể hữu ích trong đời sống hằng ngày nhưng vẫn che giấu một chi phí môi trường kéo dài hơn?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn 1 đối lập trực tiếp <i>comfort is often brief</i> với <i>packaging begins a much longer journey</i>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A khớp đầy đủ hai vế của câu hỏi.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. Paragraph 1</div>"},{"n":24,"section":5,"stem":"Question 24: The word “They” in paragraph 1 refers to ______.","options":{"A":"the small daily comforts","B":"these convenient choices","C":"the school-day purchases","D":"the packaged items"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> ‘Comforts’ không phải danh từ ngay trước.</li><li><b>B.</b> Đúng: câu trước là <i>These choices do not look selfish. They save time...</i>.</li><li><b>C.</b> Quá hẹp; không chỉ hành vi mua hàng mà là các lựa chọn tiện lợi vừa nêu.</li><li><b>D.</b> Các đồ được đóng gói không phải chủ thể logic của <i>save time, protect things...</i>.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Từ <i>They</i> ở đoạn 1 thay cho đối tượng nào?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p><i>These choices do not look selfish. <b>They</b> save time...</i></p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>Đại từ số nhiều <b>They</b> thay trực tiếp cho <b>These choices</b>.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. these convenient choices</div>"},{"n":25,"section":5,"stem":"Question 25: What can be inferred about plastic from paragraph 2?","options":{"A":"Plastic becomes a problem only when people use it carelessly.","B":"The useful qualities of plastic also help create waste problems that are difficult to manage.","C":"Waste systems have made single-use plastic spread faster in many places.","D":"Cheap packaging is mainly harmful because it looks clean and comfortable."},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Sai vì chính cheap/light/easy-to-make đã góp phần vào vấn đề ngay cả trước khi xét ‘careless use’.</li><li><b>B.</b> Đúng: các tính chất hữu ích khiến single-use items lan nhanh hơn khả năng quản lý của nhiều hệ thống rác.</li><li><b>C.</b> Đảo quan hệ nhân quả: plastic spread faster than waste systems can manage, không phải waste systems làm plastic lan nhanh.</li><li><b>D.</b> Đoạn 2 không nói tác hại chính là ‘looks clean and comfortable’.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Có thể suy ra điều gì về nhựa từ đoạn 2?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p><i>plastic is useful because it is cheap, light, and easy to make, but these same qualities have allowed single-use items to spread faster than many waste systems can manage</i>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B là suy luận trực tiếp từ cấu trúc <b>useful qualities → unintended waste problem</b>.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. The useful qualities of plastic also help create waste problems that are difficult to manage.</div>"},{"n":26,"section":5,"stem":"Question 26: The word “virtue” in paragraph 3 is closest in meaning to ______.","options":{"A":"public duty","B":"useful habit","C":"valued quality","D":"social skill"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> <b>public duty</b>: nghĩa vụ công cộng.</li><li><b>B.</b> <b>useful habit</b>: thói quen hữu ích.</li><li><b>C.</b> <b>valued quality</b>: phẩm chất được coi trọng, phù hợp nghĩa ‘đức tính/điều tốt’.</li><li><b>D.</b> <b>social skill</b>: kỹ năng xã hội.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Từ <i>virtue</i> ở đoạn 3 gần nghĩa nhất với từ nào?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p><i>Modern life also teaches speed as a virtue.</i> = đời sống hiện đại xem tốc độ như một phẩm chất đáng coi trọng.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C gần nghĩa nhất.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. valued quality</div>"},{"n":27,"section":5,"stem":"Question 27: Which of the following best paraphrases the underlined sentence in paragraph 3?","options":{"A":"People cannot make sustainable choices when practical options are unavailable.","B":"Students avoid refill stations because packaged drinks feel more comfortable.","C":"Schools should blame students who continue to buy single-use cups.","D":"Refill stations matter less than advertisements and social media trends."},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đúng: con người không thể chọn phương án bền vững nếu phương án thực tế đó không được cung cấp.</li><li><b>B.</b> Câu gốc không nói học sinh ‘avoid’ refill station.</li><li><b>C.</b> Trái thông điệp: tác giả phản đối chỉ đổ lỗi người tiêu dùng.</li><li><b>D.</b> Không so sánh mức độ quan trọng.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Phương án nào diễn đạt lại tốt nhất câu “A student cannot use a refill station that does not exist”?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Câu gốc là ví dụ cho luận điểm rằng <b>available choices have been shaped</b> và trách nhiệm không thể chỉ đặt lên người tiêu dùng.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A khái quát chính xác ý ‘choice requires available infrastructure’.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. People cannot make sustainable choices when practical options are unavailable.</div>"},{"n":28,"section":5,"stem":"Question 28: The word “condemned” in paragraph 4 is OPPOSITE in meaning to ______.","options":{"A":"blamed","B":"questioned","C":"avoided","D":"accepted"},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> <b>blamed</b>: bị lên án/đổ lỗi, gần nghĩa.</li><li><b>B.</b> <b>questioned</b>: bị nghi vấn, không đối nghĩa trực tiếp.</li><li><b>C.</b> <b>avoided</b>: bị tránh né.</li><li><b>D.</b> <b>accepted</b>: được chấp nhận → đối nghĩa rõ nhất.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Từ <i>condemned</i> trong đoạn 4 TRÁI NGHĨA với từ nào?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p><i>convenience is redesigned, not merely condemned</i> — condemned = bị lên án/chỉ trích.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p>Đối nghĩa là <b>accepted</b>.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. accepted</div>"},{"n":29,"section":5,"stem":"Question 29: Which of the following is NOT mentioned as a way to make sustainable choices easier?","options":{"A":"Creating reusable systems.","B":"Raising prices for single-use items.","C":"Providing honest labels.","D":"Improving collection systems."},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Có: <i>Reusable systems</i>.</li><li><b>B.</b> Không có ý tăng giá đồ dùng một lần.</li><li><b>C.</b> Có: <i>honest labels</i>.</li><li><b>D.</b> Có: <i>better collection</i>.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Ý nào KHÔNG được nhắc đến như một cách giúp lựa chọn bền vững trở nên dễ dàng hơn?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn 4 liệt kê trực tiếp <i>Reusable systems, honest labels, better collection, and refill options</i>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B là ý duy nhất không xuất hiện.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. Raising prices for single-use items.</div>"},{"n":30,"section":5,"stem":"Question 30: In which paragraph does the writer argue that comfort should be redesigned responsibly rather than simply rejected?","options":{"A":"Paragraph 1","B":"Paragraph 3","C":"Paragraph 4","D":"Paragraph 2"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đoạn 1 mô tả mặt hữu ích và chi phí dài hạn.</li><li><b>B.</b> Đoạn 3 phân tích speed và cấu trúc lựa chọn.</li><li><b>C.</b> Đúng: đoạn 4 mở <i>The wiser question is not whether comfort should be rejected</i> và kết bằng <i>convenience is redesigned, not merely condemned</i>.</li><li><b>D.</b> Đoạn 2 nói nhựa và waste systems.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Đoạn nào cho rằng sự tiện lợi nên được thiết kế lại có trách nhiệm thay vì đơn giản bị loại bỏ?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Toàn bộ đoạn 4 tập trung giải pháp ‘design comfort’ và ‘redesign convenience’.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C là đáp án trực tiếp.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. Paragraph 4</div>"},{"n":31,"section":6,"stem":"Question 31: Where in the passage does the following sentence best fit?<br><span class='insert-sentence'>Together, these small features show that health can be supported by the design of everyday public places.</span>","options":{"A":"[I]","B":"[II]","C":"[III]","D":"[IV]"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> [I] quá sớm vì chưa có các ‘small features’ cụ thể để <i>Together</i> tổng kết.</li><li><b>B.</b> [II] mới có path và playground, chưa có garden; có thể hiểu nhưng chưa tổng hợp đủ chuỗi ví dụ.</li><li><b>C.</b> Đúng: sau path, playground và garden, câu <i>Together</i> tổng kết các ví dụ rồi dẫn sang câu khái quát <i>Health is built...</i>.</li><li><b>D.</b> Nếu ở [IV], nó đứng sau câu khái quát về health, tạo lặp ý và thứ tự kém tự nhiên.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Câu “Cùng nhau, những đặc điểm nhỏ này cho thấy sức khỏe có thể được hỗ trợ bằng thiết kế của các không gian công cộng hằng ngày” nên đặt ở đâu?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn 2: câu chủ đề → ví dụ shaded path/playground/garden → [III] → câu tổng quát về health trong benches, trees, paths.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C hoạt động như cầu nối <b>examples → general conclusion</b>.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Với câu chèn có từ <b>Together/these</b>, phải đặt sau đủ các ví dụ mà nó quy chiếu.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. [III]</div>"},{"n":32,"section":6,"stem":"Question 32: According to paragraph 1, the small park is presented as a place that ______.","options":{"A":"makes city streets quieter by reducing traffic noise","B":"makes concrete streets look more carefully designed","C":"lets people pause within a fast-moving city","D":"helps residents move through crowded streets faster"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Không có thông tin công viên giảm traffic noise.</li><li><b>B.</b> Không chỉ là decoration/design.</li><li><b>C.</b> Đúng: <i>In cities trained to move quickly, a place that lets people stay becomes more than decoration.</i></li><li><b>D.</b> Ngược ý; công viên cho phép ở lại/chậm lại, không giúp di chuyển nhanh hơn.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Theo đoạn 1, công viên nhỏ được mô tả như một nơi làm gì?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Câu cuối đoạn 1 trực tiếp nói park là nơi <b>lets people stay</b> trong thành phố di chuyển nhanh.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C paraphrase ‘pause/stay’.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. lets people pause within a fast-moving city</div>"},{"n":33,"section":6,"stem":"Question 33: What can be inferred from paragraph 2 about the value of green spaces?","options":{"A":"They support health when they are close, usable, and part of daily life.","B":"They mainly improve health when they are placed in wealthy districts.","C":"They matter less than hospitals and fitness plans in shaping health.","D":"Their value depends chiefly on providing organised sports facilities."},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đúng: shaded paths, playgrounds, garden near homes và benches/trees/paths hỗ trợ sức khỏe khi gắn với đời sống thường ngày.</li><li><b>B.</b> Trái câu nói garden nên gần homes thay vì hidden in a wealthy district.</li><li><b>C.</b> Trái ý <i>Health is built not only in hospitals...</i>.</li><li><b>D.</b> Quá hẹp; đoạn không tập trung organised sports.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Có thể suy ra gì từ đoạn 2 về giá trị của không gian xanh?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn nhấn mạnh các yếu tố nhỏ, gần nhà và dễ sử dụng trong không gian hằng ngày.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A tổng hợp đúng các ví dụ.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. They support health when they are close, usable, and part of daily life.</div>"},{"n":34,"section":6,"stem":"Question 34: Which of the following best summarises paragraph 2?","options":{"A":"Urban greenery improves cities mainly by creating a calmer image that makes public campaigns more persuasive to residents.","B":"Green spaces work best when gardens are kept away from ordinary homes and placed in quiet districts for careful use.","C":"Public health should depend more on hospitals and fitness plans than on everyday features such as benches and paths.","D":"Green spaces support everyday health by making movement, rest, stress relief, and social contact easier within ordinary city life."},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Tập trung image/public campaigns, thuộc đoạn 3 chứ không phải đoạn 2.</li><li><b>B.</b> Trái nội dung garden near homes.</li><li><b>C.</b> Trái câu <i>not only in hospitals or fitness plans</i>.</li><li><b>D.</b> Đúng: path giúp đi bộ, playground kéo trẻ khỏi màn hình, garden giảm stress/kết nối hàng xóm, benches/trees hỗ trợ chậm lại.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Phương án nào tóm tắt đoạn 2 tốt nhất?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn 2 liệt kê nhiều cơ chế sức khỏe thể chất, tinh thần và xã hội trong đời sống đô thị hằng ngày.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p>D bao quát toàn đoạn.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. Green spaces support everyday health by making movement, rest, stress relief, and social contact easier within ordinary city life.</div>"},{"n":35,"section":6,"stem":"Question 35: The word “them” in paragraph 3 refers to ______.","options":{"A":"local green areas","B":"nearby spaces","C":"advertised parks","D":"wealthy districts"},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> ‘local green areas’ không phải cụm xuất hiện trực tiếp ngay trước.</li><li><b>B.</b> Đúng: <i>nearby spaces remain poorly lit, neglected, or too far from those who need them most</i>.</li><li><b>C.</b> Glossy riverside park là số ít, không phù hợp <i>them</i>.</li><li><b>D.</b> Không phải đối tượng được ‘need’.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Từ <i>them</i> ở đoạn 3 thay cho gì?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Antecedent gần nhất và phù hợp số nhiều là <b>nearby spaces</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B đúng quy chiếu đại từ.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. nearby spaces</div>"},{"n":36,"section":6,"stem":"Question 36: The word “glossy” in paragraph 3 is closest in meaning to ______.","options":{"A":"distant","B":"simple","C":"attractive","D":"crowded"},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> <b>distant</b>: xa.</li><li><b>B.</b> <b>simple</b>: đơn giản.</li><li><b>C.</b> <b>attractive</b>: bóng bẩy, hấp dẫn về hình ảnh; phù hợp quảng cáo.</li><li><b>D.</b> <b>crowded</b>: đông đúc.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Từ <i>glossy</i> trong đoạn 3 gần nghĩa nhất với từ nào?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p><i>a glossy riverside park appears in an advertisement</i> — glossy mang sắc thái hình ảnh được đánh bóng, đẹp hấp dẫn.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C gần nghĩa nhất trong các lựa chọn.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. attractive</div>"},{"n":37,"section":6,"stem":"Question 37: Which of the following is NOT mentioned as a task that matters after a green space is opened?","options":{"A":"Keeping walkways clean","B":"Fixing lighting problems","C":"Taking care of young trees","D":"Lowering local rents"},"correct":"D","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Có: <i>who cleans the paths</i>.</li><li><b>B.</b> Có: <i>repairs the lights</i>.</li><li><b>C.</b> Có: <i>waters the trees</i>, tức chăm sóc cây.</li><li><b>D.</b> Không có nhiệm vụ giảm giá thuê nhà.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Nhiệm vụ nào KHÔNG được nhắc đến như việc quan trọng sau khi không gian xanh mở cửa?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Đoạn 4 liệt kê cleaning paths, repairing lights, watering trees, keeping gates open.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn D?</b><p>D không nằm trong danh sách.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: D. Lowering local rents</div>"},{"n":38,"section":6,"stem":"Question 38: Which of the following best paraphrases the underlined sentence in paragraph 4?","options":{"A":"Good green spaces let people take part in sustainable living instead of merely looking at it.","B":"Good green spaces are valuable mainly because they help people admire the city from far away.","C":"Good green spaces should be protected from daily use so that their beauty can be maintained.","D":"Good green spaces turn sustainability into a polished image that people can enjoy visually."},"correct":"A","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đúng: greenery tốt cho phép người dân sống/tham gia bên trong tính bền vững, không chỉ ngắm từ xa; câu sau còn nói <i>It gives them a place inside it</i>.</li><li><b>B.</b> Trái nghĩa ‘does not ask people to admire ... from a distance’.</li><li><b>C.</b> Trái ý use/access.</li><li><b>D.</b> Đây chính là kiểu ‘polished promise’ bài cảnh báo.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Phương án nào diễn đạt lại tốt nhất câu “Good greenery does not ask people to admire sustainability from a distance”?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Underlined sentence + câu sau tạo cặp: không chỉ nhìn từ xa → có một chỗ ở bên trong.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn A?</b><p>A là paraphrase đầy đủ nhất.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: A. Good green spaces let people take part in sustainable living instead of merely looking at it.</div>"},{"n":39,"section":6,"stem":"Question 39: Which of the following can be inferred from the passage?","options":{"A":"Green spaces should be judged mainly by how attractive they look in public campaigns and advertisements.","B":"Green spaces improve cities most when access, long-term care, and social fairness are treated as connected goals.","C":"Cleaner air and physical activity are enough to make a park socially successful for nearby residents.","D":"Urban parks can serve residents well even when long-term care is treated as a later detail."},"correct":"B","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Trái đoạn 3 phê phán glossy image.</li><li><b>B.</b> Đúng: đoạn 2 nhấn mạnh access gần nhà; đoạn 3 cảnh báo bất công/gentrification; đoạn 4 nhấn mạnh maintenance lâu dài.</li><li><b>C.</b> Quá hẹp; social contact, mental health và fairness cũng quan trọng.</li><li><b>D.</b> Trái đoạn 4: ‘harder test comes after the ribbon is cut’ — chăm sóc dài hạn là cốt lõi.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Có thể suy ra điều gì từ toàn bài?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Ba mạch xuyên suốt là <b>usable access + social fairness + ongoing maintenance</b>.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn B?</b><p>B kết nối đúng các điều kiện để park thật sự có ích.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: B. Green spaces improve cities most when access, long-term care, and social fairness are treated as connected goals.</div>"},{"n":40,"section":6,"stem":"Question 40: Which of the following best summarises the passage?","options":{"A":"Urban greenery is valuable because it gives city residents places to exercise and rest while helping them escape wider public problems in crowded cities.","B":"Building more parks is the main solution because green spaces naturally improve health and create social equality without the need for further planning.","C":"Green spaces can improve urban life, but they must remain accessible, well maintained, and socially fair rather than merely decorative urban features.","D":"Parks can make cities calmer, but the passage mainly presents them as tools for creating a cleaner public image of urban development."},"correct":"C","explanation":"<h4>PHẦN GIẢI THÍCH CHI TIẾT</h4>\n<div class=\"ex-step\"><b>1. Phân tích 4 đáp án</b><ul><li><b>A.</b> Đúng một phần về exercise/rest nhưng bỏ access, maintenance, inequality và image problem.</li><li><b>B.</b> Sai vì bài nhấn mạnh cần planning, maintenance và social fairness; parks không tự động tạo bình đẳng.</li><li><b>C.</b> Đúng: bao quát lợi ích, access, chăm sóc lâu dài, công bằng xã hội và cảnh báo chống biến greenery thành decoration/image.</li><li><b>D.</b> Đảo trọng tâm; bài phê phán việc dùng park như public image.</li></ul></div>\n<div class=\"ex-step\"><b>2. Dịch câu hỏi</b><p>Phương án nào tóm tắt toàn bài tốt nhất?</p></div>\n<div class=\"ex-step\"><b>3. Bằng chứng trong bài</b><p>Toàn bài đi từ lợi ích đời thường → điều kiện tiếp cận → nguy cơ ‘glossy’/gentrification → trách nhiệm chăm sóc lâu dài.</p></div>\n<div class=\"ex-step\"><b>4. Tại sao chọn C?</b><p>C là tóm tắt cân bằng và đầy đủ nhất.</p></div>\n<div class=\"ex-step\"><b>5. Kiến thức / chiến thuật cần nhớ</b><p>Bám sát đúng đoạn được hỏi, tìm từ khóa/paraphrase và tránh suy diễn vượt quá nội dung bài.</p></div>\n<div class=\"answer-line\">Đáp án đúng: C. Green spaces can improve urban life, but they must remain accessible, well maintained, and socially fair rather than merely decorative urban features.</div>"}];
+const SOURCES={"1":"\n<div class=\"paper-instruction\">Read the following advertisement and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</div>\n<h2>Single-Use Plastics: Ban Them Completely?</h2>\n<p>Single-use plastics are used in many areas of daily life because they are cheap and convenient. However, growing environmental <b>(1) ______</b> have led many people to question whether these products should be banned completely. The issue remains widely discussed by students, consumers, and policymakers.</p>\n<p>Some arguments in favour of a ban include:</p>\n<ul>\n<li>The amount of plastic waste in rivers and oceans has increased significantly in recent years.</li>\n<li>Environmental groups suggest <b>(2) ______</b> the use of disposable products whenever possible.</li>\n<li>Plastic waste often ends up in natural areas, leading <b>(3) ______</b> serious damage to wildlife.</li>\n<li>Governments can encourage the use of products that are <b>(4) ______</b> than single-use plastics.</li>\n</ul>\n<p>Others argue that a complete ban may be difficult to implement immediately. Instead, both governments and citizens should <b>(5) ______</b> responsibility for reducing waste. Long-term solutions supported by campaigns <b>(6) ______</b> aim to reduce plastic waste may help create lasting change.</p>\n","2":"\n<div class=\"paper-instruction\">Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</div>\n<h2>Eco-Tourism: Protecting Nature or Destroying It?</h2>\n<h3>Problem</h3>\n<p>Eco-tourism is often seen as a responsible way to explore nature. However, when visitor numbers grow quickly, it can create serious environmental problems if it is not managed carefully.</p>\n<p><b>(7) ______</b> visitor numbers continue to increase at the current rate, natural areas will eventually experience serious environmental pressure. It is high time local authorities <b>(8) ______</b> visitor numbers before noise, litter, and overcrowding damage local habitats.</p>\n<p>Wildlife may also be affected. Of the four tour groups visiting the area, two follow environmental guidelines carefully, while protected areas are sometimes <b>(9) ______</b> by the others.</p>\n<h3>Solutions</h3>\n<p>To reduce these impacts, local authorities regularly examine concerns raised by local people and conservation groups. They also <b>(10) ______</b> complaints about tourism activities before introducing new rules. Education programmes and visitor limits can help protect natural <b>(11) ______</b> where animals live and plants grow.</p>\n<p>In the future, eco-tourism will only remain successful if travellers develop a stronger commitment to environmental <b>(12) ______</b>.</p>\n","4":"\n<div class=\"paper-instruction\">Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</div>\n<p>Among the contradictions of fast fashion, one deserves particular attention: the cheapest clothes often carry costs that are not printed on the price tag. When a new T-shirt costs less than lunch, its low price may lead to <b>(18) ______</b>. Closer inspection often tells a different story. Many low-priced garments are made from synthetic materials, <b>(19) ______</b>. The price may look small at checkout, yet water, energy, harmful chemicals, and labour have already been used before the item reaches a shop. <b>(20) ______</b>.</p>\n<p>We tend to judge clothes by what we can see because style, colour, and discounts are the easiest evidence available. We cannot see wastewater from dyeing, greenhouse gas emissions from transport, or textile waste created when clothes are worn only a few times, <b>(21) ______</b>. Fast fashion has turned quick replacement into a normal habit, packaging constant novelty as affordability. However, more sustainable fashion often hides in the item repaired, the used item donated, the garment kept for another season, and the unnecessary purchase refused.</p>\n<p>In short, a bargain is not always sustainable simply because it saves money at the checkout. Consumers should therefore be careful <b>(22) ______</b> when deciding whether a garment is truly sustainable; otherwise, mistaking low price for low impact can lead to more waste, not better choices.</p>\n","5":"\n<div class=\"paper-instruction\">Read the passage and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</div>\n<h2>Are We Sacrificing Sustainability for Comfort?</h2>\n<p><b>1.</b> At the end of a school day, convenience can feel generous. A cold drink comes in a cup, noodles arrive in a clean box, and a plastic bag keeps a wet umbrella away from books. These choices do not look selfish. <u><b>They</b></u> save time, protect things, and make tired people feel looked after. Yet the comfort is often brief, while the packaging begins a much longer journey.</p>\n<p><b>2.</b> UNEP notes that plastic is useful because it is cheap, light, and easy to make, but these same qualities have allowed single-use items to spread faster than many waste systems can manage. This is the quiet cost hidden inside convenience. A cup held for minutes may remain in drains, landfills, or rivers for years. Not every easy choice is careless, but every easy choice has a background, often carried by places and people we rarely see.</p>\n<p><b>3.</b> Modern life also teaches speed as a <u><b>virtue</b></u>. Advertisements make instant delivery look tidy and caring, while social media turns neat packaging into part of a comfortable lifestyle. Then public talk often blames consumers for creating waste, even when available choices have been shaped for quick use and quick disposal. <u><b>A student cannot use a refill station that does not exist.</b></u> A parent coming home late may buy packaged food because time, money, and energy are limited.</p>\n<p><b>4.</b> The wiser question is not whether comfort should be rejected. Comfort matters, especially to those worn down by work, heat, traffic, or family pressure. The challenge is to design comfort that does not quietly move its burden onto rivers, waste workers, or children who will inherit the mess. Reusable systems, honest labels, better collection, and refill options can make sustainable choices less heroic. Only when convenience is redesigned, not merely <u><b>condemned</b></u>, can comfort become part of a responsible life.</p>\n<p class=\"source-note\">[Adapted from<br><u><b>https://www.unep.org/resources/report/single-use-plastics-roadmap-sustainability</b></u>]</p>\n","6":"\n<div class=\"paper-instruction\">Read the passage and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</div>\n<h2>Can Green Spaces Improve Urban Life?</h2>\n<p><b>1.</b> From an apartment balcony, a patch of colour appears in the middle of concrete. Children run under young trees, office workers eat lunch on the steps, and an old man sits with a quiet radio. Only later is it clear that this small park does more than fill space. Nothing dramatic happens there. That is partly the point. In cities trained to move quickly, a place that lets people stay becomes more than decoration.</p>\n<p><b>2.</b> Green spaces improve urban life because they work through ordinary bodies. <b>[I]</b> A shaded path makes walking less tiring. A playground can pull children away from screens. <b>[II]</b> A garden, placed near homes rather than hidden in a wealthy district, can reduce stress and make neighbours visible to one another. <b>[III]</b> Health is built not only in hospitals or fitness plans, but also into benches, trees, paths, and the quiet permission to slow down. <b>[IV]</b></p>\n<p><b>3.</b> The problem begins when greenery is asked to do the work of an image. Public campaigns can help people imagine cleaner, calmer city life. But the same images can also sell aspiration: a <u><b>glossy</b></u> riverside park appears in an advertisement while nearby spaces remain poorly lit, neglected, or too far from those who need <u><b>them</b></u> most. New parks can make an area attractive, then more expensive, leaving long-time residents unsure whether the improvement was truly meant for them. A park can heal a neighbourhood, or become a sign that it is being prepared for someone else.</p>\n<p><b>4.</b> The better question is not whether cities need more green spaces. They do. The harder test comes after the ribbon is cut: who cleans the paths, repairs the lights, waters the trees, and keeps the gates open without making it private scenery? Planned with care, parks can support physical activity, mental health, cleaner air, and social contact without becoming another polished promise. <u><b>Good greenery does not ask people to admire sustainability from a distance.</b></u> It gives them a place inside it.</p>\n<p class=\"source-note\">[Adapted from<br><u><b>https://www.who.int/europe/publications/i/item/WHO-EURO-2016-3352-43111-60341</b></u>]</p>\n"};
+const VOCAB={"4":[["contradiction","n"],["price tag","n"],["synthetic materials","phrase"],["tiny fibres","phrase"],["wastewater","n"],["greenhouse gas emissions","phrase"],["textile waste","phrase"],["fast fashion","phrase"],["affordability","n"],["sustainable fashion","phrase"],["environmental impact","phrase"],["unnecessary purchase","phrase"]],"5":[["convenience","n"],["single-use item","phrase"],["landfill","n"],["waste system","phrase"],["virtue","n"],["instant delivery","phrase"],["quick disposal","phrase"],["refill station","phrase"],["condemn","v"],["reusable system","phrase"],["honest label","phrase"],["sustainable choice","phrase"]],"6":[["urban life","phrase"],["green space","phrase"],["shaded path","phrase"],["stress relief","phrase"],["aspiration","n"],["glossy","adj"],["neglected","adj"],["long-time resident","phrase"],["ribbon is cut","idiom/phrase"],["social contact","phrase"],["social fairness","phrase"],["well maintained","phrase"],["sustainability","n"]]};
+const ARRANGEMENT_INSTRUCTION="Mark the letter A, B, C or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a cohesive and coherent exchange or text in each of the following questions from 13 to 17.";
+const KEY='unit2_humans_environment_test3_babypink_dark_v1';
+let soundOn=true;
+let state={answers:{},first:{},retries:{},name:'',cls:'',vocab:{}};
+// Explicit DOM references for maximum browser compatibility.
+const main=document.getElementById('main');
+const studentName=document.getElementById('studentName');
+const studentClass=document.getElementById('studentClass');
+const saveIdentity=document.getElementById('saveIdentity');
+const sDone=document.getElementById('sDone');
+const sLeft=document.getElementById('sLeft');
+const sCorrect=document.getElementById('sCorrect');
+const sWrong=document.getElementById('sWrong');
+const sRate=document.getElementById('sRate');
+const progress=document.getElementById('progress');
+const unfinishedBtn=document.getElementById('unfinishedBtn');
+const wrongBtn=document.getElementById('wrongBtn');
+const submitBtn=document.getElementById('submitBtn');
+const resetBtn=document.getElementById('resetBtn');
+const clearBtn=document.getElementById('clearBtn');
+const submitBox=document.getElementById('submitBox');
+const soundBtn=document.getElementById('soundBtn');
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function vocabBlock(sec){
+  const list=VOCAB[String(sec)]; if(!list)return '';
+  return `<div class="vocab"><h3>📘 TỪ VỰNG B1+ CẦN BIẾT TRƯỚC KHI ĐỌC</h3>
+  <div class="hint">Các từ/cụm quan trọng xuất hiện trực tiếp trong bài. Em tự tra và điền nghĩa tiếng Việt vào cột bên phải trước khi đọc.</div>
+  <div class="vgrid"><div class="vcell"><b>Từ / cụm từ</b></div><div class="vcell"><b>Nghĩa em tự tra</b></div>
+  ${list.map((x,i)=>`<div class="vrow"><div class="vcell"><span class="vword">${esc(x[0])}</span> <span class="pos">(${esc(x[1])})</span></div><div class="vcell"><input class="vocab-input" data-vocab="${sec}-${i}" value="${esc(state.vocab[sec+'-'+i]||'')}" placeholder="Tự điền nghĩa..."></div></div>`).join('')}</div></div>`;
+}
+function qCard(q){
+  return `<article class="qcard" id="q${q.n}" data-q="${q.n}">
+  <div class="qhead"><div class="qnum">${q.stem}</div><span class="qbadge">Câu ${q.n} / 40</span></div>
+  <div class="options" role="group" aria-label="Đáp án câu ${q.n}">
+    ${Object.entries(q.options).map(([k,v])=>`<button class="option" data-choice="${k}" aria-label="Câu ${q.n} đáp án ${k}"><span class="letter">${k}.</span><span class="txt">${v}</span><span class="state-tag"></span></button>`).join('')}
+  </div>
+  <div class="feedback" aria-live="polite"></div>
+  <div class="explain">${q.explanation}</div>
+  <div class="qactions"><button class="smallbtn retry">↻ Làm lại câu này</button><button class="smallbtn primary next">Câu tiếp theo →</button></div>
+  </article>`;
+}
+function render(){
+  let h='';
+  for(let sec=1;sec<=6;sec++){
+    const qs=QUESTIONS.filter(q=>q.section===sec);
+    if(sec===3){
+      h+=`<section class="section ${sec===1?'active':''}" id="sec${sec}"><div class="arr-layout">
+      <aside class="arr-guide"><h3>🧩 Questions 13–17</h3><p><b>${ARRANGEMENT_INSTRUCTION}</b></p><p class="note">Mẹo: theo dõi từ nối, đại từ quy chiếu, cặp hỏi–đáp và trình tự thời gian.</p></aside>
+      <div class="questions">${qs.map(q=>qCard(q)).join('')}</div></div></section>`;
+    } else {
+      h+=`<section class="section ${sec===1?'active':''}" id="sec${sec}">${vocabBlock(sec)}<div class="split">
+      <article class="passage">${SOURCES[String(sec)]||''}</article><div class="questions">${qs.map(q=>qCard(q)).join('')}</div></div></section>`;
+    }
+  }
+  main.innerHTML=h; bind(); restore();
+}
+function bind(){
+  document.querySelectorAll('.qcard').forEach(card=>{
+    const n=+card.dataset.q;
+    card.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>answer(n,b.dataset.choice)));
+    card.querySelector('.retry').addEventListener('click',()=>retry(n));
+    card.querySelector('.next').addEventListener('click',()=>goNext(n));
+  });
+  document.querySelectorAll('.vocab-input').forEach(inp=>inp.addEventListener('input',()=>{state.vocab[inp.dataset.vocab]=inp.value;persist();}));
+}
+function answer(n,choice){
+  if(state.answers[n])return;
+  const q=QUESTIONS.find(x=>x.n===n),card=document.getElementById('q'+n),ok=choice===q.correct;
+  state.answers[n]={choice,correct:ok}; if(state.first[n]===undefined)state.first[n]=ok;
+  card.querySelectorAll('.option').forEach(b=>{b.disabled=true;const k=b.dataset.choice,t=b.querySelector('.state-tag');
+    if(k===q.correct){b.classList.add('correct');t.textContent=k===choice?'✓ Đúng':'✓ Đáp án đúng';}
+    else if(k===choice){b.classList.add('wrong');t.textContent='✕ Sai';}
+    else b.classList.add('strike');
+  });
+  const fb=card.querySelector('.feedback');fb.className='feedback '+(ok?'good':'bad');
+  fb.textContent=ok?'✓ Chính xác! Giỏi lắm, con cố lên!':'✕ Chưa chính xác! Đáp án đúng là '+q.correct+'.';
+  card.querySelector('.explain').classList.add('open');card.querySelector('.qactions').classList.add('show');
+  if(ok){ding();confetti(card);speak('Giỏi lắm, con cố lên!');}else{wrongTone();card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');speak('Ôi trời ơi, con đọc kỹ đáp án cho cô!');}
+  updateStats();persist();
+}
+function retry(n){
+  const card=document.getElementById('q'+n);delete state.answers[n];state.retries[n]=(state.retries[n]||0)+1;
+  card.querySelectorAll('.option').forEach(b=>{b.disabled=false;b.classList.remove('correct','wrong','strike');b.querySelector('.state-tag').textContent='';});
+  card.querySelector('.feedback').className='feedback';card.querySelector('.feedback').textContent='';
+  card.querySelector('.explain').classList.remove('open');card.querySelector('.qactions').classList.remove('show');
+  updateStats();persist();card.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(n){
+  const next=QUESTIONS.find(q=>q.n===n+1);if(!next)return submitBtn.scrollIntoView({behavior:'smooth'});
+  const cur=QUESTIONS.find(q=>q.n===n);if(next.section!==cur.section)activate(next.section);
+  setTimeout(()=>document.getElementById('q'+next.n).scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+function restore(){
+  for(const [n,a] of Object.entries(state.answers)){
+    const q=QUESTIONS.find(x=>x.n===+n),card=document.getElementById('q'+n);if(!q||!card)continue;
+    card.querySelectorAll('.option').forEach(b=>{b.disabled=true;const k=b.dataset.choice,t=b.querySelector('.state-tag');
+      if(k===q.correct){b.classList.add('correct');t.textContent=k===a.choice?'✓ Đúng':'✓ Đáp án đúng';}
+      else if(k===a.choice){b.classList.add('wrong');t.textContent='✕ Sai';}else b.classList.add('strike');
+    });
+    const fb=card.querySelector('.feedback');fb.className='feedback '+(a.correct?'good':'bad');fb.textContent=a.correct?'✓ Chính xác!':'✕ Chưa chính xác! Đáp án đúng là '+q.correct+'.';
+    card.querySelector('.explain').classList.add('open');card.querySelector('.qactions').classList.add('show');
+  }
+  studentName.value=state.name||'';studentClass.value=state.cls||'';updateStats();
+}
+function updateStats(){
+  const done=Object.keys(state.first).length,correct=Object.values(state.first).filter(Boolean).length,wrong=done-correct,rate=done?Math.round(correct/done*100):0;
+  sDone.textContent=done;sLeft.textContent=40-done;sCorrect.textContent=correct;sWrong.textContent=wrong;sRate.textContent=rate+'%';progress.style.width=(done/40*100)+'%';
+}
+function activate(sec){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec'+sec).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',+t.dataset.sec===+sec));window.scrollTo({top:document.querySelector('.tabs').offsetTop-8,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>activate(t.dataset.sec)));
+function findFirst(fn){const q=QUESTIONS.find(fn);if(!q)return alert('Không có câu phù hợp.');activate(q.section);setTimeout(()=>document.getElementById('q'+q.n).scrollIntoView({behavior:'smooth',block:'center'}),80)}
+unfinishedBtn.addEventListener('click',()=>findFirst(q=>state.first[q.n]===undefined));
+wrongBtn.addEventListener('click',()=>findFirst(q=>state.first[q.n]===false));
+submitBtn.addEventListener('click',()=>{
+  const correct=Object.values(state.first).filter(Boolean).length,done=Object.keys(state.first).length,pct=Math.round(correct/40*100),score=(correct/40*10).toFixed(2).replace('.00','');
+  const msg=pct>=90?'Con làm rất tốt! Hãy tiếp tục phát huy nhé!':pct>=70?'Con làm khá tốt! Hãy xem lại một vài câu nhé!':pct>=50?'Con đã có cố gắng! Hãy đọc kỹ phần giải thích và làm lại nhé!':'Không sao đâu! Con hãy bình tĩnh xem lại kiến thức và thử thêm lần nữa nhé!';
+  submitBox.innerHTML=`<div class="scorebig">${score} / 10</div><p><b>${esc(state.name||'Học sinh')}</b>${state.cls?' • Lớp '+esc(state.cls):''}</p><p>Đã làm lần đầu: <b>${done}/40</b> • Đúng lần đầu: <b>${correct}</b> • Chưa làm: <b>${40-done}</b></p><p>${msg}</p><p class="note">Điểm giữ theo kết quả lần trả lời đầu tiên để sát cách làm bài trên giấy. Các lần “Làm lại câu này” chỉ phục vụ luyện tập.</p>`;
+  submitBox.classList.add('show');submitBox.scrollIntoView({behavior:'smooth'});
+});
+saveIdentity.addEventListener('click',()=>{state.name=studentName.value.trim();state.cls=studentClass.value.trim();persist();});
+studentName.addEventListener('change',()=>{state.name=studentName.value.trim();persist();});
+studentClass.addEventListener('change',()=>{state.cls=studentClass.value.trim();persist();});
+resetBtn.addEventListener('click',()=>{if(confirm('Làm lại toàn bộ? Kết quả hiện tại sẽ được xóa.')){state={answers:{},first:{},retries:{},name:studentName.value.trim(),cls:studentClass.value.trim(),vocab:state.vocab||{}};persist();render();activate(1);}});
+clearBtn.addEventListener('click',()=>{if(confirm('Xóa toàn bộ dữ liệu đã lưu trên trình duyệt?')){localStorage.removeItem(KEY);state={answers:{},first:{},retries:{},name:'',cls:'',vocab:{}};render();activate(1);}});
+soundBtn.addEventListener('click',()=>{soundOn=!soundOn;soundBtn.textContent=soundOn?'🔊 Âm thanh: Bật':'🔇 Âm thanh: Tắt';if(!soundOn&&'speechSynthesis'in window)speechSynthesis.cancel();persist();});
+function persist(){localStorage.setItem(KEY,JSON.stringify({...state,soundOn}));}
+function load(){
+  const raw=localStorage.getItem(KEY);if(raw){try{const old=JSON.parse(raw);if(confirm('Phát hiện bài đang làm dở. Con có muốn tiếp tục không?')){state={answers:old.answers||{},first:old.first||{},retries:old.retries||{},name:old.name||'',cls:old.cls||'',vocab:old.vocab||{}};soundOn=old.soundOn!==false;}else localStorage.removeItem(KEY);}catch(e){}}
+  soundBtn.textContent=soundOn?'🔊 Âm thanh: Bật':'🔇 Âm thanh: Tắt';
+}
+function speak(text){if(!soundOn||!('speechSynthesis'in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='vi-VN';u.rate=.95;speechSynthesis.speak(u);}catch(e){}}
+function actx(){return new (window.AudioContext||window.webkitAudioContext)();}
+function ding(){if(!soundOn)return;try{const c=actx(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(660,c.currentTime);o.frequency.exponentialRampToValueAtTime(980,c.currentTime+.18);g.gain.setValueAtTime(.12,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.32);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.33);}catch(e){}}
+function wrongTone(){if(!soundOn)return;try{const c=actx();[0,1,2].forEach(i=>{const o=c.createOscillator(),g=c.createGain(),t=c.currentTime+i*.14;o.type='triangle';o.frequency.value=[440,330,220][i];g.gain.setValueAtTime(.1,t);g.gain.exponentialRampToValueAtTime(.001,t+.13);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.14);})}catch(e){}}
+function confetti(card){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=card.getBoundingClientRect(),x=r.left+r.width/2,y=Math.min(r.top+100,innerHeight-80),colors=['#c92532','#ef6a72','#ffd6d9','#5fb77d','#ffffff'];for(let i=0;i<34;i++){const e=document.createElement('i');e.className='confetti';e.style.left=x+'px';e.style.top=y+'px';e.style.background=colors[i%colors.length];e.style.setProperty('--dx',(Math.random()*420-210)+'px');e.style.setProperty('--dy',(Math.random()*300-180)+'px');document.body.appendChild(e);setTimeout(()=>e.remove(),950)}}
+load();render();
+</script>
+</body>
+</html>
